@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Array Exercise</title>
+
+	<!-- Write a JavaScript program which prompts the user for a number and console.logs that number as a string with dashes (-) between each two odd digits. For example if the user types 0253697 the output should be “025-369-7”. -->
+	</head>
+
+	<body>
+	
+
+<!-- outside of loop-prompt user to enter a number 
+	split the string into an array
+-->
+
+
+	<script type="text/javascript">
+	//parts that I need:
+	//need to find length (numarray.length)
+	//outer while loop (while i is less than array length)
+	//if else loop
+	//what is the true condition that will trigger the dashing?
+
+
+	//afterthought i = i + 1
+
+
+		var num; //the number user enters when prompted
+		var numArray = 0;//the array that loop will work upon
+		var howLong = (numArray.length);
+		var i = 0; //the index number
+
+
+		var num = prompt("Please enter an multi-digit number that can be dashed between sequential odd digits.");
+		numArray = num.split("");//create array
+		console.log (numArray);
+		howLong = numArray.length;//how many items in array 
+		console.log(howLong);
+
+		while (i < howLong ){
+		console.log (numArray[i]);
+
+		//if (numarray[] && numarray []) {}
+
+
+		i = i + 1;
+		}//this is the end of while
+
+	</script>
+
+
+
+	</body>
+</html>

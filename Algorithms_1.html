@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reverse order string.</title>
+</head>
+<body>
+
+<!-- Given a string, for example, “Hello World”, write some code to reverse that string (“dlroW olleH”).
+
+(Hint: try using the Array.reverse() method! But, if you do, try solving it just using looping as well). -->
+
+<!-- First I need to create the string.
+in script do a split string thing split on "".
+Then put it into an array
+then do a reverse order thingy on it. 
+Splitting on "" will keep the space between words intact.
+Need a command to stop the loop e.g. when index = 0. 
+Need a command to concatenate the array for output.
+
+Use push to add each item to end of the backwards string.
+
+Array.reverse method will just reverse it then console it etc. Looping would count down the index using minus minus.
+-->
+
+
+
+<!-- Put the script at the bottom -->
+<script type="text/javascript">
+// redo this with a prompt...
+
+var rWsplit = "Soles occidere et redire possunt/ Nobiscum occidet semel brevis lux.".split("");
+var backwards = [];
+console.log (rWsplit);
+var howMany = (rWsplit.length);
+console.log (howMany);
+var i =howMany - 1; 
+console.log (i);
+while (i >=0) {
+	backwards.push (rWsplit[i]);
+	console.log (backwards);
+
+i = i - 1; //this is the afterthought and is at end of loop
+
+}
+backwards = backwards.join (""); //when done with loop need to put the string back together
+console.log (backwards);
+
+//I put in lots of console.logs because I wanted to see what was happening at every step. That's how I caught that I should assign howMany - 1 as first value of i. It was starting the array with undefined.
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
