@@ -4,6 +4,8 @@
 		<title>Array Exercise</title>
 
 	<!-- Write a JavaScript program which prompts the user for a number and console.logs that number as a string with dashes (-) between each two odd digits. For example if the user types 0253697 the output should be “025-369-7”. -->
+
+
 	</head>
 
 	<body>
@@ -14,37 +16,68 @@
 -->
 
 
-	<script type="text/javascript">
-	//parts that I need:
-	//need to find length (numarray.length)
-	//outer while loop (while i is less than array length)
-	//if else loop
-	//what is the true condition that will trigger the dashing?
+	
+	<!-- parts that I need:
+	need to find length (numarray.length)
+	outer while loop (while i is less than array length)
+	if else loop
+	what is the true condition that will trigger the dashing?-->
 
+	<!-- //afterthought i = i + 1 -->
 
-	//afterthought i = i + 1
-
-
+	<script>
 		var num; //the number user enters when prompted
-		var numArray = 0;//the array that loop will work upon
-		var howLong = (numArray.length);
-		var i = 0; //the index number
+		var numArray;//the array that loop will work upon
+		var numSpliceArray = [];//
+		// var howLong = (numArray.length);
+		var dashArray = [];
 
 
-		var num = prompt("Please enter an multi-digit number that can be dashed between sequential odd digits.");
+		num = prompt("Please enter an multi-digit number that can be dashed between sequential odd digits.");
 		numArray = num.split("");//create array
-		console.log (numArray);
-		howLong = numArray.length;//how many items in array 
-		console.log(howLong);
+			console.log (numArray);
+		var howLong = numArray.length;//how many items in array 
+			console.log(howLong);
 
-		while (i < howLong ){
-		console.log (numArray[i]);
+		var numDashed;
 
-		//if (numarray[] && numarray []) {}
+//I need to use numArray.splice to insert a dash where needed.
+			// for (var i = 0; i < numArray.length; i++) {
+			// 	if (numArray[i]%2 ===0){
+			// 		numSpliceArray.push (numArray[i]);
 
 
-		i = i + 1;
-		}//this is the end of while
+			// 	} else if (numArray[i]%2 !== 0 && numArray[i+1]%2 !==0){
+			// 		numSpliceArray.push (numArray[i]);
+			// 		numSpliceArray.push ("-");
+			// 	 }
+			// 	// else if (numArray[i]%2 !== 0 && i === numArray.length){
+			// 	// 	numSpliceArray.push (numArray[i]);
+			// 	// 	}
+			// }
+
+
+
+			//sarah's version
+
+			for (var i = 0; i < numArray.length; i++) {
+				if (numArray[i] %2 === 1 && numArray[i+1]%2 === 1){
+					//any odd number divided by two will have a remainder of 1
+					numSpliceArray.push (numArray[i]);
+					numSpliceArray.push ("-");
+				 }else {
+				 	numSpliceArray.push (numArray[i])
+				 }
+
+			}
+
+			numDashed = numSpliceArray.join();
+
+			console.log (numArray);
+			console.log (numDashed);
+
+
+		//need to turn array into string after adding dashes
 
 	</script>
 
