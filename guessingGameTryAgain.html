@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guessing Game Trial</title>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div>
+	<h2>Please think of a number from 1 to 100 (inclusive) and I will guess what it is. When you are ready click the button. If my guess is correct, type y. If it is too low, type l. If it is too high then type h. If you click on cancel you will have to quit the page in order to play the game again. To quit, type q. </h2>
+
+	<button id ="begin">Begin Game</button><br>
+
+	<input type="text" name= "input">
+	<p id="dialogue">Here</p>
+</div>
+
+
+<script>
+	function guessIt() {
+		debugger;
+		var upperLimit = 100;
+		var lowerLimit = 1;
+		var guess = 50;
+		var answer = prompt ("Is the number " + guess + "?");
+
+		if (answer == y){
+
+			answer = prompt("Is the number " + guess + "?");
+			document.getElementById("dialogue").innerHTML = "I guessed correctly. To play again, click begin game.";
+			return;
+		}
+		while (answer !== y && ( 1 >= guess>= 100 )) {
+
+			if (answer == l){
+				guess = Math.floor(guess + (guess)/2 );
+				answer = prompt ("Is the number " + guess + "?");
+
+			}
+
+			if (answer == h){
+				guess = Math.floor(guess + lowerLimit)/2;
+			}
+		} //end of while loop
+
+
+		} //end of guessIt
+	
+
+	$(document).ready(function(){
+		    $("#begin").click(function(){
+		        guessIt();
+		    });
+	});
+
+
+</script>
+</body>
+</html>

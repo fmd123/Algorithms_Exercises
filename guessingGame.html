@@ -1,0 +1,106 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guessing Game</title>
+	<script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+<!-- Write a guessing game using looping and prompts!
+
+Have the user come up with a number from 1 and 100 (inclusive), but not enter it into the computer. Have the computer guess numbers in that same range, and ask the user if that is the number (e.g. “Is 40 your number?”). You can use prompt text (prompt("is 40 your number")) to accomplish this. If the number is too high, have the user enter “H”. If the number is too low, have the user enter “L”. If the computer guessed the number, have the user enter “Y”, and start a new game. Can you write an efficient algorithm so that the computer will find your number in the minimum number of guesses? -->
+	<style>
+		body {
+			background-color: azure;
+		}
+		div {
+			text-align: center;
+		}
+		#begin {
+			background-color: cornflowerblue; font-size: 20px; color: red; opacity: 0.5; filter: alpha(opacity=50);
+		}
+		#begin:hover {
+			opacity: 1.0;
+			filter:alpha(opacity=100);
+		}
+		
+	</style>
+</head>
+
+<body>
+	<div>
+		<h2>Please think of a number from 1 to 100 (inclusive) and I will guess what it is. When you are ready, click the button. If my guess is correct, type y. If it is too low, type l. If it is too high then type h. If you click on cancel you will have to close the page in order to play the game again. To quit the game, type q. </h2>
+
+		<button id ="begin">Begin Game</button><br>
+
+		<!-- <input type="text" name= "input"> -->
+		<p id="dialogue">Let's begin!</p>
+	</div>
+
+<script>
+	
+function guessIt() {
+		// debugger;
+		var upper = 101;
+		var lower = 0;
+		// Using 100 +1 and 1-1 extends the range so that this app can guess numbers 1-100 inclusive. 
+		var mid = lower + Math.floor((upper - lower)/2);
+		var answer = prompt ("Is the number " + mid + "?");
+
+		if (answer == "y"){
+			document.getElementById("dialogue").innerHTML = "I guessed correctly. :-) To play again, click begin game.";
+			return;
+		} else {
+				while (answer !== "y") {
+
+					if (answer === "l"){
+						lower = mid;
+						mid = lower + Math.floor((upper - lower)/2);
+							if ((upper - lower) === 1 || mid === 0){
+								document.getElementById("dialogue").innerHTML = "Did you forget your number? To play again, click begin game.";
+								return;
+							}
+						answer = prompt ("Is the number " + mid + "?");
+
+					} else if (answer === "h"){
+						upper = mid;
+						mid = lower + Math.floor((upper - lower)/2);
+							if ((upper - lower) === 1 || mid === 0 ){
+								document.getElementById("dialogue").innerHTML = "Did you forget your number? To play again, click Begin Game.";
+								return;
+							}
+						answer = prompt ("Is the number " + mid + "?");
+					} else if (answer === "q") {
+						return;
+					} else {
+						answer = prompt ("Please use only l, q, y, or h. Is the number " + mid + "?");
+					}
+
+				} //end of while loop
+		}//end of else
+} //end of guessIt
+
+	
+
+	$(document).ready(function(){
+		    $("#begin").click(function(){
+		        guessIt();
+		    });
+	});
+</script>
+
+<!-- Basic premise is that each round of while-loop tightens the range by truncating at the midpoint. The old midpoint becomes either the new upper limit or the new lower limit.
+The new midpoint is calculated and then the user is queried once more 
+until user gives a yes response 
+OR when (U - L = 0 ) 
+or could use m = 0 (math.floor(.5) = 0) -->
+
+<!-- What I was failing to realize at first was that I needed another variable to allow the range and midpoint values to cycle/juggle. I also needed to realize that the range needed to be "free-floating." -->
+
+<!-- Do I need an absolute value for U-L?  -->
+<!-- Don't forget Math.floor -->
+<!-- For later: do .toUpperCase to handle either capitals or miniscule. 
+				Make the response be a set of buttons? Good way to keep the functionality clear so user doesn't mistakenly enter wrong input.-->
+
+
+</body>
+</html>

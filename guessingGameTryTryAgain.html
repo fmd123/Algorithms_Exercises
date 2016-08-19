@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guessing Game try try again</title>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div>
+		<h2>Please think of a number from 1 to 100 (inclusive) and I will guess what it is. When you are ready click the button. If my guess is correct, type y. If it is too low, type l. If it is too high then type h. If you click on cancel you will have to quit the page in order to play the game again. To quit, type q. </h2>
+
+		<button id ="begin">Begin Game</button><br>
+
+		<!-- <input type="text" name= "input"> -->
+		<p id="dialogue">Here</p>
+	</div>
+
+<script>
+	
+function guessIt() {
+		// debugger;
+		var upper = 101;
+		var lower = 0;
+		// Using 100 +1 and 1-1 extends the range so that this app can guess numbers 1-100 inclusive. 
+		var mid = lower + Math.floor((upper - lower)/2);
+		var answer = prompt ("Is the number " + mid + "?");
+
+		if (answer == "y"){
+			document.getElementById("dialogue").innerHTML = "I guessed correctly. :-) To play again, click begin game.";
+			return;
+		} else {
+				while (answer !== "y") {
+
+					if (answer === "l"){
+						lower = mid;
+						mid = lower + Math.floor((upper - lower)/2);
+							if (mid === 0){
+								document.getElementById("dialogue").innerHTML = "Did you forget your number? To play again, click begin game.";
+								return;
+							}
+						answer = prompt ("Is the number " + mid + "?");
+
+					} else if (answer === "h"){
+						upper = mid;
+						mid = lower + Math.floor((upper - lower)/2);
+							if (mid === 0){
+								document.getElementById("dialogue").innerHTML = "Did you forget your number? To play again, click begin game.";
+								return;
+							}
+						answer = prompt ("Is the number " + mid + "?");
+					} else if (answer === "q") {
+						return;
+					}
+
+				} //end of while loop
+		}//end of else
+} //end of guessIt
+
+	
+
+	$(document).ready(function(){
+		    $("#begin").click(function(){
+		        guessIt();
+		    });
+	});
+
+
+
+
+</script>
+
+<!-- Basic premise is that each round of while-loop tightens the range by truncating at the midpoiint. The old midpoint becomes either the new upper limit or the new lower limit.
+The new midpoint is calculated and then the user is queried once more 
+until user gives a yes response 
+OR when (U - L = 0 ) 
+or could use m = 0 (math.floor(.5) = 0) -->
+
+<!-- I'm also doing  -->
+
+<!-- What I was failing to realize at first was that I needed another variable to allow the range and midpoint values to cycle/juggle. I also needed to realize that the range needed to be "free-floating." -->
+
+<!-- Do I need an absolute value for U-L?  -->
+<!-- Don't forget Math.floor -->
+<!-- For later: do .toUpperCase to handle either capitals or miniscule. 
+				Make the response be a set of buttons? Good way to keep the functionality clear so user doesn't mistakenly enter wrong input.-->
+
+
+</body>
+</html>

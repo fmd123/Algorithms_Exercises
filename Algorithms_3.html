@@ -12,23 +12,23 @@
 
 <script type="text/javascript">
 		
-var num1 = 0; 
-var num2 = 1; //these will be the two fibonacci numbers to add. starting with 0+1
-var num3 = 1;// this is the sum of the two previous fibonacci numbers
-var sum = 0;// this will be the running total
+	var num1 = 0; 
+	var num2 = 1; //these will be the two fibonacci numbers to add. starting with 0+1
+	var num3 = 1;// this is the sum of the two previous fibonacci numbers
+	var sum = 0;// this will be the running total
 
 
-while (num3 < 2000000) {
+	while (num3 < 2000000) {
+		
+		num3 = num1 + num2; //the basis of the fiboancci sequence
+		num1 = num2; //shift values of the numbers
+		num2 = num3;
 	
-	num3 = num1 + num2; //the basis of the fiboancci sequence
-	num1 = num2; //shift values of the numbers
-	num2 = num3;
-	
-if ( num3 % 2 === 0) {
-		sum = sum + num3;
-		console.log (sum);
+			if ( num3 % 2 === 0) {
+				sum = sum + num3;
+				console.log (sum);
+			}
 	}
-}
 
 </script>
 </body>
