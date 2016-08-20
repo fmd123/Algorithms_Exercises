@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RoomsAdventure</title>
+	<script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div>
+		<h2>Dragon game directions...... need options for quit. </h2>
+
+		<button id ="begin">Begin Game</button><br>
+
+		<!-- <input type="text" name= "input"> -->
+		<p id="dialogue">Let's begin!</p>
+	</div>
+
+<script type>
+
+		
+
+	function start(){
+		// debugger;
+		var room = "startRoom";
+		var answer;
+		var shield = false;
+		
+		if (room === "startRoom"){
+			//debugger;
+			answer = prompt("You are in a room with exits to the north and south. Please enter a command (\'go north\'' or \'go south\'");
+			if (answer === "go north") {
+				room = "dragonRoom";
+			} else if (answer === "go west") {
+				room = "westRoom";
+			} else if (answer === "quit"){
+				return;	
+			} else {
+				answer = prompt("You can't go that way or do that. Please enter another command.");
+			}
+		}
+
+
+
+		else if (room === "westRoom"){
+			answer = prompt("You have the shield now and can get past the dragon. Where do you want to go now?");
+			if (answer === "go east") {
+				room = "startRoom";
+			} else if (answer === "quit"){
+				return;	
+			}else {
+				answer = prompt("you can't go that way or do that thing. Please choose something else.");
+			}
+		}
+
+		else if(room === "westRoom"){
+			answer = prompt("What do you want to do now?");
+			if (answer === "get shield") {
+				answer = prompt ("you can get past the dragon now. Where do you want to go?");
+				shield = true;
+			}
+			if (answer === "go east") {
+				room = "startRoom";
+			} else if (answer === "quit"){
+				return;	
+			}else {
+				answer = prompt("you can't go that way or do that thing. Please choose something else.");
+			}
+		}
+		else if(shield === false && room === "dragonRoom"){
+			if (answer === "go north") {
+				document.getElementById("dialogue").innerHTML = "The dragon made you into crispy dragon snacks. To play again, click begin game";
+			} else if ( answer === "go south") {
+				room = "startRoom";
+			} else if (answer === "quit"){
+				return;
+			} else {
+				answer = prompt("you can't go that way or do that thing. Please choose something else.");
+			}
+		} else if(shield === true && room === "dragonRoom"){
+			answer = prompt("Where do you want to go?");
+			if (answer === "go north") {
+				document.getElementById("dialogue").innerHTML = "Success! The dragon did not eat you and you have escaped the game.";
+				return;
+			} else if (answer === "go south"){
+				room = "startRoom";
+			} else {
+				answer = prompt("you can't go that way or do that thing. Please choose something else.");
+			}
+
+		}
+		
+	}//end of start()
+
+
+$(document).ready(function(){
+		    $("#begin").click(function(){
+		        start();
+		    });
+	});
+</script>
+
+</body>
+</html>

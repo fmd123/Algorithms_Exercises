@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RoomsAdventure</title>
+	<script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div>
+		<h2>Dragon game directions...... need options for quit. </h2>
+
+		<button id ="begin">Begin Game</button><br>
+
+		<!-- <input type="text" name= "input"> -->
+		<p id="dialogue">Let's begin!</p>
+	</div>
+
+<script type>
+var answer;
+var room;
+var shield;		
+
+	function start(){
+		console.log ("startroom");
+		
+		answer = prompt("You are in a room with a door to the north and a door to the south. Which way do you want to go?");
+		document.getElementById("dialogue").innerHTML = "Start Room";
+			if (answer === "go north"){
+				document.getElementById("dialogue").innerHTML = "Dragon Room";
+				dragon();
+				
+			} else if (answer === "go west"){
+				document.getElementById("dialogue").innerHTML = "west Room";
+				west();
+				
+			} else if (answer === "go east"){
+				answer = prompt("you can't go east. Which way do you want to go?");
+			} else if (answer === "go south"){
+				answer = prompt("you can't go south. Which way do you want to go?");
+			} else if (answer === "quit") {
+				document.getElementById('dialogue').innerHTML = "bye!";
+				return;
+			} else {
+				answer = prompt("Please choose from available answers. Which way do you want to go?");
+			}
+
+	}
+
+	function dragon(){
+		console.log ("dragon room");
+		answer = prompt("There is a dragon here. What do you want to do?");
+		if (answer === "quit");
+		document.getElementById("dialogue").innerHTML = "Too late, you were eaten.";
+		return;
+	}
+
+	function west() {
+		console.log ("westroom");
+		document.getElementById("dialogue").innerHTML = "west Room";
+		answer = prompt("You are in a room with a shield. What do you want to do?");
+
+	}
+$(document).ready(function(){
+		    $("#begin").click(function(){
+		        start();
+		    });
+	});
+
+</script>
+
+</body>
+</html>
