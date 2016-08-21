@@ -151,9 +151,10 @@ $(document).ready(function(){
 	});
 
 </script>
-<!-- passingThru() was created to handle a scoping problem. the while loop conditions were leaking thru' 
+<!-- passingThru() was created to handle a scoping problem (I think. maybe not needed now that I reset answer to null at beginning of each function). 
 I added the room variable to deal with a while-loop problem. (it quit after second iteration of unacceptable answer.)  
 I put the while loop on top to deal with problem of app quitting if I finally did enter an acceptable answer.
-reset answer to null  at beginning of function to deal with situation of while loop room === passing and answer === go east because answer was "go east" from previous answer. that might eliminate need for passingThru()-->
+
+I reset answer to null  at beginning of functions to deal with situation of e.g. in passingThru the while-loop had room === passing and answer === go east because answer was "go east" from leaving westroom. that might eliminate need for passingThru()-->
 </body>
 </html>
