@@ -7,12 +7,12 @@
 <body>
 
 	<div>
-		<h2>Dragon game directions...... need options for quit. </h2>
+		<h4>Dragon game directions...... need options for quit. </h4>
 
 		<button id ="begin">Begin Game</button><br>
 
 		<!-- <input type="text" name= "input"> -->
-		<p id="dialogue">Let's begin!</p>
+		<h3 id="dialogue">Let's begin!</h3>
 	</div>
 
 <script type>
@@ -23,6 +23,7 @@ var restart = false;
 
 	function start(){
 		room = "startroom";
+		answer = null;
 		console.log ("startroom");
 		answer = prompt("You are in a room with a door to the north and a door to the west. Which way do you want to go?");
 
@@ -49,6 +50,7 @@ var restart = false;
 
 	function dragon(){
 		room = "dragonroom";
+		answer = null;
 		console.log ("dragon room");
 		answer = prompt("There is a dragon here. What do you want to do?");
 
@@ -81,6 +83,7 @@ var restart = false;
 	
 	function west() {
 		room = "westroom";
+		answer = null;
 		console.log ("westroom");
 		answer = prompt("You are in a room with a shield. What do you want to do?");
 		while (room === "westroom" && (answer === "go west" || answer === "go south" || answer === "go north")) {
@@ -91,19 +94,17 @@ var restart = false;
 			console.log ("shield picked up");
 			shield = true;
 			answer = prompt("you now have a shield. Which way do you want to go?");
+				while (room === "westroom" && (answer === "go west" || answer === "go south" || answer === "go north")) {
+				answer = prompt("you can't go that way in west room. Which way do you want to go?");
+				}
 
 				if (answer === "go east"){
 				console.log ("going east");
-				passingThru(	);
-
-				} else if (answer === "go west" || answer === "go south" || answer === "go north") {
-						answer = prompt("you can't go that way. Which way do you want to go?");
+				passingThru();
 
 				} else if (answer === "quit") {
 						document.getElementById('dialogue').innerHTML = "oh well, the dagon would have probably eaten you!";
 						return;
-				} else {
-					answer = prompt("please choose from the possible answers given in the directions. What would you like to do?");
 				}
 		}else if (answer === "go east"){
 			console.log ("going east");
@@ -113,17 +114,16 @@ var restart = false;
 		} else if (answer === "quit") {
 				document.getElementById('dialogue').innerHTML = "Oh well, the dragon would have probably eaten you!";
 				return;
-		} else if (answer !== "go west" || answer !== "go south" || answer !== "go north"|| answer !== "go east" || answer !=="quit" || answer !== "get shield"){
-			answer = prompt("please choose from the possible answers given in the directions. What would you like to do?");
 		}
 		
 	}
-
+ 
 	function passingThru (){
 		room = "passing";
+		answer = null;
 		console.log ("passing thru startroom");
 		while (room === "passing" && (answer === "go east" || answer === "go south")){
-				answer = prompt("you can't go that way. Which way do you want to go?");
+				answer = prompt("you can't pass that way. Which way do you want to go?");
 			}
 		answer = prompt("You are in a room with a door to the north and a door to the west. Which way do you want to go?");
 		
@@ -153,6 +153,7 @@ $(document).ready(function(){
 </script>
 <!-- passingThru() was created to handle a scoping problem. the while loop conditions were leaking thru' 
 I added the room variable to deal with a while-loop problem. (it quit after second iteration of unacceptable answer.)  
-I put the while loop on top to deal with problem of app quitting if I finally did enter an acceptable answer.-->
+I put the while loop on top to deal with problem of app quitting if I finally did enter an acceptable answer.
+reset answer to null  at beginning of function to deal with situation of while loop room === passing and answer === go east because answer was "go east" from previous answer. that might eliminate need for passingThru()-->
 </body>
 </html>
