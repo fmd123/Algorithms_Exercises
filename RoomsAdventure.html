@@ -2,86 +2,178 @@
 <html>
 <head>
 	<title>RoomsAdventure</title>
+	<script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
 </head>
 <body>
 
 	<div>
-		<h2>Dragon game directions...... need options for quit. </h2>
+		<h4>Dragon game directions...... need options for quit. </h4>
 
 		<button id ="begin">Begin Game</button><br>
 
 		<!-- <input type="text" name= "input"> -->
-		<p id="dialogue">Let's begin!</p>
+		<h3 id="dialogue">Let's begin!</h3>
 	</div>
 
 <script type>
-
-		var room;
-		var answer;
-		var shield;
+var answer;
+var room;
+var shield = false;
+var restart = false;		
 
 	function start(){
-		
-		while(shield === false && room === startRoom){
-			answer = prompt("You are in a room with exits to the north and south. Please enter a command (\'go north\'' or \'go south\'");
-			if (answer === "go north") {
-				room = dragonRoom;
-				dragon();
-			} else if (answer === "go west") {
-				room = westRoom;
-				westRoom ();
-			} else if (answer === "quit"){
-				return;	
-			} else {
-				answer = prompt("You can't go that way or do that. Please enter another command.");
-			}
-		}//end of shield is false while loop
-		
-	}//end of Start()
 
-	function dragon (){
-		room = dragonRoom;
-		while (shield === false && room === dragonRoom){
-			answer = prompt("You are in a room with an exit to the north and a large hungry dragon. What do you want to do?");
+		room = "startroom";
+		answer = null;
+		console.log ("startroom");
+		answer = prompt("You are in a room with a door to the north and a door to the west. Which way do you want to go?");
+		
 			if (answer === "go north"){
-				document.getElementByID("dialogue").innerHTML = "The dragon toasted you into a crispy dragon snack. Try again?";
-			} else if (answer ==="go south") {
-				room = startRoom;
-				start ();
+				console.log (" going north");
+				dragon();
+
+			} else if (answer === "go east"){
+				answer = alert("you can't go that way.");
+				start();
+
+			} else if (answer === "go south"){
+				answer = alert("you can't go that way.");
+				start();
+
+			
+				
+			} else if (answer === "go west"){
+				console.log ("going west");
+				west();
+				
+			
+			} else if (answer === "quit") {
+				document.getElementById('dialogue').innerHTML = "Bye!";
+				return;
+
+			} else  {
+				console.log ("input error");
+				answer = alert("please choose from the possible answers given in the directions. What would you like to do?");
+				start();
+
+		}
+			
+	}
+
+	function dragon(){
+		room = "dragonroom";
+		answer = null;
+		console.log ("dragon room");
+		answer = prompt("There is a dragon here. What do you want to do?");
+
+		while (room === "dragonroom" && (answer === "go east" || answer === "go west")){
+			answer = alert("you can't go that way.");
+			dragon();
+		 }
+
+		if (answer === "go north" && shield === true){
+				console.log (" going north");
+				document.getElementById("dialogue").innerHTML = "You have safely passed the dragon and survived the game. Refresh page to play again.";
+				return;
+		} else if (answer === "go north" && shield === false) {
+				document.getElementById("dialogue").innerHTML = "The dragon has turned you into crispy fries. Refresh page to play again.";
+				return;
+		} else if (answer === "go south"){
+				console.log ("going south");
+				passingThru();
+				
+		
+		} else if (answer === "quit") {
+				document.getElementById('dialogue').innerHTML = "Too late, you were eaten.";
+				return;
+		} else {
+				answer = alert("please choose from the possible answers given in the directions.");
+				dragon();
+		}
+
+		
+	}
+	
+	
+	function west() {
+		room = "westroom";
+		answer = null;
+		console.log ("westroom");
+		answer = prompt("You are in a room with a shield. What do you want to do?");
+		while (room === "westroom" && (answer === "go west" || answer === "go south" || answer === "go north")) {
+				answer = alert("you can't go that way.");
+				west();
+		}
+
+		if (answer === "get shield") {
+			console.log ("shield picked up");
+			shield = true;
+			answer = prompt("you now have a shield. Which way do you want to go?");
+				while (room === "westroom" && (answer === "go west" || answer === "go south" || answer === "go north")) {
+				answer = alert("you can't go that way in this room.");
+				}
+
+				if (answer === "go east"){
+				console.log ("going east");
+				passingThru();
+
+				} else if (answer === "quit") {
+						document.getElementById('dialogue').innerHTML = "oh well, the dagon would have probably eaten you!";
+						return;
+				}
+		}else if (answer === "go east"){
+			console.log ("going east");
+			passingThru();
+
+		
+		} else if (answer === "quit") {
+				document.getElementById('dialogue').innerHTML = "Oh well, the dragon would have probably eaten you!";
+				return;
+		} else {
+				answer = alert("please choose from the possible answers given in the directions. What would you like to do?");
+				west();
+		}
+		
+	}
+ 
+	function passingThru (){
+		room = "passing";
+		answer = null;
+		console.log ("passing thru startroom");
+		while (room === "passing" && (answer === "go east" || answer === "go south")){
+				answer = prompt("you can't pass that way. Which way do you want to go?");
+				passingThru();
+			}
+		answer = prompt("You are in a room with a door to the north and a door to the west. Which way do you want to go?");
+		
+			if (answer === "go north"){
+				console.log (" going north");
+				document.getElementById("dialogue").innerHTML = "Dragon Room";
+				dragon();
+				
+			} else if (answer === "go west"){
+				console.log ("going west");
+				west();
+				
+			
+			} else if (answer === "quit") {
+				document.getElementById('dialogue').innerHTML = "Bye!";
+				return;
 			} else {
-				answer = prompt("You can't go that way or do that action. Please choose another command.");
-			}
-		}//end of while loop
-
-	}//end of dragon()
-
-	function west (){
-		room = westRoom;
-		while (shield === false && room === westRoom) {
-			answer = prompt("There is a shield here. What do you want to do?");
-			if (answer === "get shield"){
-				answer = prompt("Now you can get past the dragon. What direction do you want to go?");
-				protected();
-			}
-			if (answer === "go east") {
-				room = startRoom;
-				start(); 
-			}
-
-		}//end of while loop
-
-	}//end of west()
-
-function protected(){
-
-}//end of protected()
+				answer = prompt("please choose from the possible answers given in the directions. What would you like to do?");
+				passingThru();
+		}
+			
+	}
 
 $(document).ready(function(){
 		    $("#begin").click(function(){
 		        start();
+		        
 		    });
 	});
-</script>
 
+</script>
+<!-- I think that the passingThru function is probably redundant at this point but I'll leave it for now. -->
 </body>
 </html>
